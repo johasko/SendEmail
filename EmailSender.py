@@ -2,16 +2,18 @@ import os
 import smtplib
 from email.message import EmailMessage
 
-# Email and password saved as environment variables.
+# Email and password saved as environment variables locally.
 user = os.environ.get('NOTTER_USER')
 password = os.environ.get('NOTTER_PASS')
 
+reciever = ""  # Dummy reciever
+
 # Setup message
 msg = EmailMessage()
-msg['Subject'] = 'Test Subject'
+msg['Subject'] = 'Email Subject'
 msg['From'] = user
-msg['To'] = user
-msg.set_content('Test Body')
+msg['To'] = reciever
+msg.set_content('Email Body')
 
 ##WITH SSL##
 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
@@ -27,9 +29,9 @@ with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
 
 #     smtp.login(user, password)
 
-#     subject = 'Bae?'
-#     body = 'Sammen?'
+#     subject = 'Email Subject'
+#     body = 'Email Body'
 
 #     msg = f'Subject: {subject}\n\n{body}'
 
-#     smtp.sendmail(user, user, msg)
+#     smtp.sendmail(user, reciever, msg)
